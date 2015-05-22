@@ -49,6 +49,7 @@ then
   make -j8
   make install
   libtool --finish /usr/src/php-src/libs
+  mkdir /opt/php-zts/modules.d/
   echo "extension=pthreads.so" > /opt/php-zts/modules.d/pthreads.ini
 
   #Symlinks

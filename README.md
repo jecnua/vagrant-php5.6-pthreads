@@ -1,7 +1,7 @@
 vagrant-php5.6-pthreads
 =======================
 
-Vagrant machine for php5.6 recompiled with pthreads
+Vagrant machine for php5.6 recompiled with pthreads.
 
 ##Source
 
@@ -19,7 +19,10 @@ have a lot of information about the pitfall of compiling php.
 
 ##Test results
 
-    $ /opt/php-zts/bin/php --version
+    vagrant@pthreads01:~$ /opt/php-zts/bin/php --version
+    PHP 5.6.10-dev (cli) (built: May 22 2015 10:46:02)
+    Copyright (c) 1997-2015 The PHP Group
+    Zend Engine v2.6.0, Copyright (c) 1998-2015 Zend Technologies
 
 ##Notes
 
