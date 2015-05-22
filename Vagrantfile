@@ -13,11 +13,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "pthreads01" do |pthreads01|
     pthreads01.vm.network "private_network", ip: "192.168.3.3"
     pthreads01.vm.provider "vmware_fusion" do |vmware|
-      vmware.vmx["memsize"] = "1024"
+      vmware.vmx["memsize"] = "2048"
       vmware.customize ["modifyvm", :id, "--cpus", "1"]
     end
     pthreads01.vm.provider "virtualbox" do |virtualbox|
-      virtualbox.memory = 1024
+      virtualbox.memory = 2048
       virtualbox.cpus = 1
     end
     pthreads01.vm.box = "ubuntu/trusty64"

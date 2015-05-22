@@ -11,7 +11,14 @@ then
 fi
 
 #Once
-if [! -f /opt/run_once ]
+if [ ! -f /opt/run_once ]
+then
+  apt-get -f
+
+  #Dependencies for the old version of ubuntu
+  apt-get -y install git m4 build-essential autoconf apache2-threaded-dev \
+  libxml2-dev libcurl4-gnutls-dev
+
   #Install necessary bison version
   wget http://launchpadlibrarian.net/140087283/libbison-dev_2.7.1.dfsg-1_amd64.deb
   wget http://launchpadlibrarian.net/140087282/bison_2.7.1.dfsg-1_amd64.deb
@@ -21,26 +28,25 @@ if [! -f /opt/run_once ]
 
   #Download PHP
   cd /usr/src
-  git clone https://github.com/php/php-src
+  #This [--depth 1 --branch PHP-5.6] will download the needed data much faster
+  git clone --depth 1 --branch PHP-5.6 https://github.com/php/php-src
   cd php-src
-
-  #Optionally check out speicific branch
-  git checkout PHP-5.6
 
   #Download pthreads
   cd ext
-  git clone https://github.com/krakjoe/pthreads
+  git clone --depth 1 https://github.com/krakjoe/pthreads
   cd ../
 
   #Compile
   ./buildconf --force
-  ./configure --prefix=/opt/php-zts --with-config-file-path=/opt/php-zts/etc --enable-maintainer-zts --with-apxs2=/usr/bin/apxs --with-mysql --with-mysqli --with-curl --with-zlib --enable-pthreads --enable-mbstring
+  sudo ./configure --prefix=/opt/php-zts --with-config-file-path=/opt/php-zts/etc \
+  --enable-maintainer-zts --with-apxs2=/usr/bin/apxs --with-mysql --with-mysqli \
+  --with-curl --with-zlib --enable-pthreads --enable-mbstring
   make -j8
   make install
   echo "extension=pthreads.so" > /opt/php-zts/modules.d/pthreads.ini
 
-
-  #Symlinking
+  #Symlinks
   ln -s /opt/php-zts/bin/php /usr/local/bin/php-zts
   ln -s /opt/php-zts/bin/phpize /usr/local/bin/phpize-zts
   ln -s /opt/php-zts/bin/php-config /usr/local/bin/php-config-zts
