@@ -11,7 +11,7 @@ then
 fi
 
 #Once
-if [ ! -f /opt/run_once ]
+if [ ! -f /opt/pthread_installed ]
 then
   apt-get -f
 
@@ -59,5 +59,5 @@ then
   ln -s /opt/php-zts/bin/php-cgi /usr/local/bin/php-cgi-zts
   ln -s /opt/php-zts/bin/phpdbg /usr/local/bin/phpdbg-zts
 
-  touch /opt/run_once
+  touch /opt/pthread_installed
 fi
