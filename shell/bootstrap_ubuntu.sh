@@ -17,7 +17,7 @@ then
 
   #Dependencies for the old version of ubuntu
   apt-get -y install git m4 build-essential autoconf apache2-threaded-dev \
-  libxml2-dev libcurl4-gnutls-dev
+  libxml2-dev libcurl4-gnutls-dev libtool apache2
 
   #Install necessary bison version
   wget http://launchpadlibrarian.net/140087283/libbison-dev_2.7.1.dfsg-1_amd64.deb
@@ -37,6 +37,10 @@ then
   git clone --depth 1 https://github.com/krakjoe/pthreads
   cd ../
 
+  #NEED THIS (check README)
+  #mkdir -p /etc/apache2/mods-available
+  #chmod 644 /etc/apache2/mods-available
+
   #Compile
   ./buildconf --force
   sudo ./configure --prefix=/opt/php-zts --with-config-file-path=/opt/php-zts/etc \
@@ -44,6 +48,7 @@ then
   --with-curl --with-zlib --enable-pthreads --enable-mbstring
   make -j8
   make install
+  libtool --finish /usr/src/php-src/libs
   echo "extension=pthreads.so" > /opt/php-zts/modules.d/pthreads.ini
 
   #Symlinks
