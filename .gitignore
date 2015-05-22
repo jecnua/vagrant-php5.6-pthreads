@@ -1,0 +1,10 @@
+pkg/
+.vagrant
+.ruby-version
+
+#Geppetto
+.project
+.tmp/
+modules/
+Puppetfile.lock
+.librarian
