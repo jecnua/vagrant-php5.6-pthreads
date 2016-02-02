@@ -34,7 +34,7 @@ then
 
   #Download pthreads
   cd ext
-  git clone --depth 1 https://github.com/krakjoe/pthreads
+  git clone --depth 1 --branch PHP5 https://github.com/krakjoe/pthreads
   cd ../
 
   #NEED THIS (check README)
